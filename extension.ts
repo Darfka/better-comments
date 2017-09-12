@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode';
 
+
 // this method is called when vs code is activated
 export function activate(context: vscode.ExtensionContext) {
 	let activeEditor: any;
@@ -23,7 +24,30 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let findSingleLineComments = function () {
 		// Regex will find: // + ! OR ? OR // OR TODO, until end of line
-		const regEx = /(\')+( )?(\!|\?|\'|\*|(todo))+(.*)+/ig;
+
+		// var lineCommentTag = "";
+		// for (var tag in contributions.lineCommentTags)
+		// 	{
+		// 		if (lineCommentTag != "")
+		// 			{
+		// 				lineCommentTag += "|";
+		// 			}
+
+		// 		lineCommentTag += tag;
+
+		// 	}
+		// lineCommentTag = '//';
+		// // lineCommentTag = lineCommentTag.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+
+		// // var regExString = `(${lineCommentTag})+( )?(\!|\?|\/\/|\'|\#|\*|(todo))+(.*)+`;
+		// // var regExString = `(\/\/)+( )?(\!|\?|\/\/|\'|\#|\*|(todo))+(.*)+`;
+
+		// // var regExString = '(\/\/|\'|\#)+( )?(\!|\?|\/\/|\'|\#|\*|(todo))+(.*)+';
+		// var regExString = '(c)+( )?(\!|\?|\/\/|\'|\#|\*|(todo))+(.*)+';
+		// regExString = regExString.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+		// const regEx = new RegExp(regExString, 'g');
+
+		const regEx = /(\/\/|\'|\#)+( )?(\!|\?|\/\/|\'|\#|\*(?!\/)|(todo))+(.*)+/ig;
 		const text = activeEditor.document.getText();
 
 		let match;
@@ -82,7 +106,6 @@ export function activate(context: vscode.ExtensionContext) {
 						break;
 
 					case "todo":
-					case "todo:":
 						todos.push(decoration);
 						break;
 

@@ -79,6 +79,11 @@
                     "type": "boolean",
                     "description": "Whether the multiline comment highlighter should be active",
                     "default": true
+                },
+                "better-comments.lineCommentTags": {
+                    "type": "array",
+                    "description": "Not implemented yet. Array of character starting a line comment",
+                    "default": ["//", "'", "#"]
                 }
             }
         }
